@@ -38,14 +38,14 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 /**
- * Plugin returns records from Zendesk API using provided by user object.
+ * Source plugin to read data from Zendesk.
  */
 @Plugin(type = BatchSource.PLUGIN_TYPE)
 @Name(ZendeskBatchSource.NAME)
 @Description("Read data from Zendesk.")
 public class ZendeskBatchSource extends BatchSource<NullWritable, StructuredRecord, StructuredRecord> {
 
-  public static final String NAME = "ZendeskBatchSource";
+  public static final String NAME = "Zendesk";
 
   private final ZendeskBatchSourceConfig config;
 
@@ -65,7 +65,7 @@ public class ZendeskBatchSource extends BatchSource<NullWritable, StructuredReco
   }
 
   @Override
-  public void prepareRun(BatchSourceContext batchSourceContext) throws Exception {
+  public void prepareRun(BatchSourceContext batchSourceContext) {
     FailureCollector failureCollector = batchSourceContext.getFailureCollector();
     config.validate(failureCollector);
     failureCollector.getOrThrowException();
@@ -88,7 +88,7 @@ public class ZendeskBatchSource extends BatchSource<NullWritable, StructuredReco
 
   @Override
   public void transform(KeyValue<NullWritable, StructuredRecord> input,
-                        Emitter<StructuredRecord> emitter) throws Exception {
+                        Emitter<StructuredRecord> emitter) {
     emitter.emit(input.getValue());
   }
 }

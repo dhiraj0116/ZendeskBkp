@@ -35,14 +35,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Plugin returns records from Zendesk API using provided by user multiple objects.
+ * Source plugin to read multiple objects from Zendesk.
  */
 @Plugin(type = BatchSource.PLUGIN_TYPE)
 @Name(ZendeskBatchMultiSource.NAME)
 @Description("Read data from Zendesk.")
 public class ZendeskBatchMultiSource extends BatchSource<NullWritable, StructuredRecord, StructuredRecord> {
 
-  public static final String NAME = "ZendeskBatchMultiSource";
+  public static final String NAME = "ZendeskMultiObjects";
 
   private static final String MULTI_SINK_PREFIX = "multisink.";
 
@@ -60,7 +60,7 @@ public class ZendeskBatchMultiSource extends BatchSource<NullWritable, Structure
   }
 
   @Override
-  public void prepareRun(BatchSourceContext batchSourceContext) throws Exception {
+  public void prepareRun(BatchSourceContext batchSourceContext) {
     FailureCollector failureCollector = batchSourceContext.getFailureCollector();
     config.validate(failureCollector);
     failureCollector.getOrThrowException();
@@ -85,7 +85,7 @@ public class ZendeskBatchMultiSource extends BatchSource<NullWritable, Structure
 
   @Override
   public void transform(KeyValue<NullWritable, StructuredRecord> input,
-                        Emitter<StructuredRecord> emitter) throws Exception {
+                        Emitter<StructuredRecord> emitter) {
     emitter.emit(input.getValue());
   }
 }

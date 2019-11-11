@@ -141,7 +141,9 @@ public class BaseZendeskSourceConfig extends ReferencePluginConfig {
     }
     if (!Strings.isNullOrEmpty(objectsToSkip)
       && getObjects().isEmpty()) {
-      collector.addFailure("All objects are skipped.", null)
+      collector.addFailure(
+        "All objects are skipped.",
+        "Make sure 'Objects to Pull' and 'Objects to Skip' fields don't hold same values.")
         .withConfigProperty(PROPERTY_OBJECTS_TO_PULL)
         .withConfigProperty(PROPERTY_OBJECTS_TO_SKIP);
     }

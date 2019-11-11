@@ -47,7 +47,7 @@ public class ZendeskInputFormat extends InputFormat {
   private static final Type SCHEMAS_TYPE = new TypeToken<Map<String, String>>() { }.getType();
 
   @Override
-  public List<InputSplit> getSplits(JobContext context) throws IOException, InterruptedException {
+  public List<InputSplit> getSplits(JobContext context) {
     Configuration configuration = context.getConfiguration();
     List<String> objects = GSON.fromJson(
       configuration.get(ZendeskBatchSourceConstants.PROPERTY_OBJECTS_JSON), OBJECTS_TYPE);
@@ -63,7 +63,7 @@ public class ZendeskInputFormat extends InputFormat {
 
   @Override
   public RecordReader createRecordReader(InputSplit split,
-                                         TaskAttemptContext context) throws IOException, InterruptedException {
+                                         TaskAttemptContext context) throws IOException {
     ZendeskSplit multiSplit = (ZendeskSplit) split;
     String object = multiSplit.getObject();
 

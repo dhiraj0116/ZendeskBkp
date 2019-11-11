@@ -36,8 +36,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 /**
- * RecordReader implementation, which reads object from Zendesk using
- * zendesk-java-client.
+ * RecordReader implementation, which reads object from Zendesk.
  */
 public class ZendeskRecordReader extends RecordReader<NullWritable, StructuredRecord> {
 
@@ -57,7 +56,7 @@ public class ZendeskRecordReader extends RecordReader<NullWritable, StructuredRe
 
   @Override
   public void initialize(InputSplit split,
-                         TaskAttemptContext taskAttemptContext) throws IOException, InterruptedException {
+                         TaskAttemptContext taskAttemptContext) {
     Configuration conf = taskAttemptContext.getConfiguration();
     String configJson = conf.get(ZendeskBatchSourceConstants.PROPERTY_CONFIG_JSON);
     ZendeskBatchSourceConfig config = GSON.fromJson(configJson, ZendeskBatchSourceConfig.class);
@@ -65,23 +64,23 @@ public class ZendeskRecordReader extends RecordReader<NullWritable, StructuredRe
   }
 
   @Override
-  public boolean nextKeyValue() throws IOException, InterruptedException {
+  public boolean nextKeyValue() {
     return pagedIterator.hasNext();
   }
 
   @Override
-  public NullWritable getCurrentKey() throws IOException, InterruptedException {
+  public NullWritable getCurrentKey() {
     return NullWritable.get();
   }
 
   @Override
-  public StructuredRecord getCurrentValue() throws IOException, InterruptedException {
+  public StructuredRecord getCurrentValue() throws IOException {
     String next = pagedIterator.next();
     return StructuredRecordStringConverter.fromJsonString(next, schema);
   }
 
   @Override
-  public float getProgress() throws IOException, InterruptedException {
+  public float getProgress() {
     return 0;
   }
 
