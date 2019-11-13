@@ -74,6 +74,16 @@
           "name": "endDate",
           "widget-attributes": {
             "placeholder": "YYYY-MM-DDThh:mm:ssZ (ex: 2019-01-01T00:00:00Z)"
+          },
+          "plugin-function": {
+            "label": "Get Schema",
+            "widget": "outputSchema",
+            "output-property": "schema",
+            "omit-properties": [
+              {
+                "name": "schema"
+              }
+            ]
           }
         },
         {

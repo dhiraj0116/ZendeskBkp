@@ -257,9 +257,8 @@
   "outputs": [
     {
       "name": "schema",
-      "widget-type": "schema",
-      "widget-attributes": {
-        "schema-default-type": "string"
+      "widget-type": "non-editable-schema-editor",
+      "schema": {
       }
     }
   ]
