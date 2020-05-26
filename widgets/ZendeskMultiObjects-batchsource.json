@@ -1,0 +1,265 @@
+{
+  "metadata": {
+    "spec-version": "1.5"
+  },
+  "configuration-groups": [
+    {
+      "label": "Basic",
+      "properties": [
+        {
+          "widget-type": "textbox",
+          "label": "Reference Name",
+          "name": "referenceName"
+        },
+        {
+          "widget-type": "textbox",
+          "label": "Admin Email",
+          "name": "adminEmail"
+        },
+        {
+          "widget-type": "password",
+          "label": "API Token",
+          "name": "apiToken"
+        },
+        {
+          "widget-type": "csv",
+          "label": "Subdomains",
+          "name": "subdomains",
+          "widget-attributes": {
+            "delimiter": ",",
+            "value-placeholder": "List of Subdomains to read object from."
+          }
+        },
+        {
+          "name": "objectsToPull",
+          "label": "Objects to Pull",
+          "widget-type": "multi-select",
+          "widget-attributes": {
+            "delimiter": ",",
+            "defaultValue": [],
+            "options": [
+              {
+                "id": "Article Comments",
+                "label": "Article Comments"
+              },
+              {
+                "id": "Post Comments",
+                "label": "Post Comments"
+              },
+              {
+                "id": "Requests Comments",
+                "label": "Requests Comments"
+              },
+              {
+                "id": "Ticket Comments",
+                "label": "Ticket Comments"
+              },
+              {
+                "id": "Groups",
+                "label": "Groups"
+              },
+              {
+                "id": "Organizations",
+                "label": "Organizations"
+              },
+              {
+                "id": "Satisfaction Ratings",
+                "label": "Satisfaction Ratings"
+              },
+              {
+                "id": "Tags",
+                "label": "Tags"
+              },
+              {
+                "id": "Ticket Fields",
+                "label": "Ticket Fields"
+              },
+              {
+                "id": "Ticket Metrics",
+                "label": "Ticket Metrics"
+              },
+              {
+                "id": "Ticket Metric Events",
+                "label": "Ticket Metric Events"
+              },
+              {
+                "id": "Tickets",
+                "label": "Tickets"
+              },
+              {
+                "id": "Users",
+                "label": "Users"
+              }
+            ]
+          }
+        },
+        {
+          "name": "objectsToSkip",
+          "label": "Objects to Skip",
+          "widget-type": "multi-select",
+          "widget-attributes": {
+            "delimiter": ",",
+            "defaultValue": [],
+            "options": [
+              {
+                "id": "Article Comments",
+                "label": "Article Comments"
+              },
+              {
+                "id": "Post Comments",
+                "label": "Post Comments"
+              },
+              {
+                "id": "Requests Comments",
+                "label": "Requests Comments"
+              },
+              {
+                "id": "Ticket Comments",
+                "label": "Ticket Comments"
+              },
+              {
+                "id": "Groups",
+                "label": "Groups"
+              },
+              {
+                "id": "Organizations",
+                "label": "Organizations"
+              },
+              {
+                "id": "Satisfaction Ratings",
+                "label": "Satisfaction Ratings"
+              },
+              {
+                "id": "Tags",
+                "label": "Tags"
+              },
+              {
+                "id": "Ticket Fields",
+                "label": "Ticket Fields"
+              },
+              {
+                "id": "Ticket Metrics",
+                "label": "Ticket Metrics"
+              },
+              {
+                "id": "Ticket Metric Events",
+                "label": "Ticket Metric Events"
+              },
+              {
+                "id": "Tickets",
+                "label": "Tickets"
+              },
+              {
+                "id": "Users",
+                "label": "Users"
+              }
+            ]
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "Start Date",
+          "name": "startDate",
+          "widget-attributes": {
+            "placeholder": "YYYY-MM-DDThh:mm:ssZ (ex: 2019-01-01T00:00:00Z)"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "End Date",
+          "name": "endDate",
+          "widget-attributes": {
+            "placeholder": "YYYY-MM-DDThh:mm:ssZ (ex: 2019-01-01T00:00:00Z)"
+          }
+        },
+        {
+          "name": "satisfactionRatingsScore",
+          "label": "Satisfaction Ratings Score",
+          "widget-type": "select",
+          "widget-attributes": {
+            "default": "",
+            "values": [
+              "",
+              "Offered",
+              "Unoffered",
+              "Received",
+              "Received With Comment",
+              "Received Without Comment",
+              "Good",
+              "Good With Comment",
+              "Good Without Comment",
+              "Bad",
+              "Bad With Comment",
+              "Bad Without Comment"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Advanced",
+      "properties": [
+        {
+          "widget-type": "number",
+          "label": "Max Retry Count",
+          "name": "maxRetryCount",
+          "widget-attributes": {
+            "min": "0",
+            "default": "20"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Max Retry Wait",
+          "name": "maxRetryWait",
+          "widget-attributes": {
+            "min": "0",
+            "default": "240"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Max Retry Jitter Wait",
+          "name": "maxRetryJitterWait",
+          "widget-attributes": {
+            "min": "0",
+            "default": "100"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Connect Timeout",
+          "name": "connectTimeout",
+          "widget-attributes": {
+            "min": "0",
+            "default": "300"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Read Timeout",
+          "name": "readTimeout",
+          "widget-attributes": {
+            "min": "0",
+            "default": "300"
+          }
+        },
+        {
+          "widget-type": "hidden",
+          "name": "zendeskBaseUrl",
+          "widget-attributes": {
+            "default": "https://%s.zendesk.com/api/v2/%s"
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "schema",
+      "widget-type": "non-editable-schema-editor",
+      "schema": {
+      }
+    }
+  ]
+}
