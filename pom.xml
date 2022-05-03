@@ -24,6 +24,33 @@
   <version>1.0.0</version>
   <packaging>jar</packaging>
   <name>Zendesk plugins</name>
+  <description>Zendesk Plugins</description>
+  <url>https://github.com/data-integrations/zendesk</url>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>CDAP</name>
+      <email>cdap-dev@googlegroups.com</email>
+      <organization>CDAP</organization>
+      <organizationUrl>http://cdap.io</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/data-integrations/zendesk.git</connection>
+    <developerConnection>scm:git:git@github.com:data-integrations/zendesk.git</developerConnection>
+    <url>https://github.com/data-integrations/zendesk.git</url>
+    <tag>HEAD</tag>
+  </scm>
 
   <properties>
     <surefire.redirectTestOutputToFile>true</surefire.redirectTestOutputToFile>
