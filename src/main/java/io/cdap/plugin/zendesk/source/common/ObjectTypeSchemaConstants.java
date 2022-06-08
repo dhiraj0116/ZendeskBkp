@@ -53,7 +53,9 @@ public class ObjectTypeSchemaConstants {
     Schema.Field.of("createdAt", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("updatedAt", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("voteSum", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
-    Schema.Field.of("voteCount", Schema.nullableOf(Schema.of(Schema.Type.LONG)))
+    Schema.Field.of("voteCount", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
+    Schema.Field.of("non_author_editor_id", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
+    Schema.Field.of("non_author_updated_at", Schema.nullableOf(Schema.of(Schema.Type.STRING)))
   );
 
   public static final Schema SCHEMA_REQUESTS_COMMENTS = Schema.recordOf(
@@ -189,7 +191,10 @@ public class ObjectTypeSchemaConstants {
     Schema.Field.of("name", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("deleted", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN))),
     Schema.Field.of("createdAt", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("updatedAt", Schema.nullableOf(Schema.of(Schema.Type.STRING)))
+    Schema.Field.of("updatedAt", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
+    Schema.Field.of("is_public", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN))),
+    Schema.Field.of("description", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
+    Schema.Field.of("default", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN)))
   );
 
   public static final Schema SCHEMA_ORGANIZATIONS = Schema.recordOf(
@@ -368,6 +373,7 @@ public class ObjectTypeSchemaConstants {
     Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("url", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("externalId", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
+    Schema.Field.of("generated_timestamp", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("type", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("subject", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("rawSubject", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
@@ -497,6 +503,8 @@ public class ObjectTypeSchemaConstants {
     Schema.Field.of("notes", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("onlyPublicComments", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN))),
     Schema.Field.of("organizationId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
+    Schema.Field.of("details", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
+    Schema.Field.of("iana_time_zone", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("defaultGroupId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("phone", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("sharedPhoneNumber", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN))),

@@ -51,6 +51,12 @@
               "Tickets",
               "Users"
             ]
+          },
+          "plugin-function": {
+            "method": "POST",
+            "widget": "outputSchema",
+            "output-property": "schema",
+            "plugin-method": "getSchema"
           }
         },
         {
@@ -91,7 +97,7 @@
           "label": "Satisfaction Ratings Score",
           "widget-type": "select",
           "widget-attributes": {
-            "default": "",
+            "default": "Offered",
             "values": [
               "",
               "Offered",

@@ -246,7 +246,12 @@ public class ZendeskBatchSourceConfig extends BaseZendeskSourceConfig {
   void validateConnection(FailureCollector collector) {
     if (containsMacro(BaseZendeskSourceConfig.PROPERTY_ADMIN_EMAIL)
       || containsMacro(BaseZendeskSourceConfig.PROPERTY_API_TOKEN)
-      || containsMacro(BaseZendeskSourceConfig.PROPERTY_SUBDOMAINS)) {
+      || containsMacro(BaseZendeskSourceConfig.PROPERTY_SUBDOMAINS)
+      || containsMacro(ZendeskBatchSourceConfig.PROPERTY_MAX_RETRY_COUNT)
+      || containsMacro(ZendeskBatchSourceConfig.PROPERTY_MAX_RETRY_JITTER_WAIT)
+      || containsMacro(ZendeskBatchSourceConfig.PROPERTY_MAX_RETRY_WAIT)
+      || containsMacro(ZendeskBatchSourceConfig.PROPERTY_CONNECT_TIMEOUT)
+      || containsMacro(ZendeskBatchSourceConfig.PROPERTY_READ_TIMEOUT)) {
       return;
     }
 
