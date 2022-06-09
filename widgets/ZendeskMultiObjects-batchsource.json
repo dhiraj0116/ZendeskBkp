@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "spec-version": "1.5"
+  },
+  "configuration-groups": [
+    {
+      "label": "Basic",
+      "properties": [
+        {
+          "widget-type": "textbox",
+          "label": "Reference Name",
+          "name": "referenceName"
+        },
+        {
+          "widget-type": "textbox",
+          "label": "Admin Email",
+          "name": "adminEmail"
+        },
+        {
+          "widget-type": "password",
+          "label": "API Token",
+          "name": "apiToken"
+        },
+        {
+          "widget-type": "csv",
+          "label": "Subdomains",
+          "name": "subdomains",
+          "widget-attributes": {
+            "delimiter": ",",
+            "value-placeholder": "List of Subdomains to read object from."
+          }
+        },
+        {
+          "name": "objectsToPull",
+          "label": "Object to Pull",
+          "widget-type": "multi-select",
+          "widget-attributes": {
+            "delimiter": ",",
+            "default": "Groups",
+            "options": [
+              "Article Comments",
+              "Post Comments",
+              "Requests Comments",
+              "Ticket Comments",
+              "Groups",
+              "Organizations",
+              "Satisfaction Ratings",
+              "Tags",
+              "Ticket Fields",
+              "Ticket Metrics",
+              "Ticket Metric Events",
+              "Tickets",
+              "Users"
+            ]
+          }
+        },
+        {
+          "name": "objectsToSkip",
+          "label": "Object to Skip",
+          "widget-type": "multi-select",
+          "widget-attributes": {
+            "delimiter": ",",
+            "default": "",
+            "options": [
+              "Article Comments",
+              "Post Comments",
+              "Requests Comments",
+              "Ticket Comments",
+              "Groups",
+              "Organizations",
+              "Satisfaction Ratings",
+              "Tags",
+              "Ticket Fields",
+              "Ticket Metrics",
+              "Ticket Metric Events",
+              "Tickets",
+              "Users"
+            ]
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "Start Date",
+          "name": "startDate",
+          "widget-attributes": {
+            "placeholder": "YYYY-MM-DDThh:mm:ssZ (ex: 2019-01-01T00:00:00Z)"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "End Date",
+          "name": "endDate",
+          "widget-attributes": {
+            "placeholder": "YYYY-MM-DDThh:mm:ssZ (ex: 2019-01-01T00:00:00Z)"
+          }
+        },
+        {
+          "name": "satisfactionRatingsScore",
+          "label": "Satisfaction Ratings Score",
+          "widget-type": "select",
+          "widget-attributes": {
+            "default": "Groups",
+            "values": [
+              "",
+              "Offered",
+              "Unoffered",
+              "Received",
+              "Received With Comment",
+              "Received Without Comment",
+              "Good",
+              "Good With Comment",
+              "Good Without Comment",
+              "Bad",
+              "Bad With Comment",
+              "Bad Without Comment"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Advanced",
+      "properties": [
+        {
+          "widget-type": "number",
+          "label": "Max Retry Count",
+          "name": "maxRetryCount",
+          "widget-attributes": {
+            "min": "0",
+            "default": "20"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Max Retry Wait",
+          "name": "maxRetryWait",
+          "widget-attributes": {
+            "min": "0",
+            "default": "240"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Max Retry Jitter Wait",
+          "name": "maxRetryJitterWait",
+          "widget-attributes": {
+            "min": "0",
+            "default": "100"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Connect Timeout",
+          "name": "connectTimeout",
+          "widget-attributes": {
+            "min": "0",
+            "default": "300"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Read Timeout",
+          "name": "readTimeout",
+          "widget-attributes": {
+            "min": "0",
+            "default": "300"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "name": "zendeskBaseUrl",
+          "widget-attributes": {
+            "default": "https://%s.zendesk.com/api/v2/%s"
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "schema",
+      "widget-type": "schema",
+      "widget-attributes": {
+        "schema-default-type": "string"
+      }
+    }
+  ]
+}
