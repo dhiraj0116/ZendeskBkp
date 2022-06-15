@@ -167,7 +167,7 @@
           }
         },
         {
-          "widget-type": "textbox",
+          "widget-type": "hidden",
           "name": "zendeskBaseUrl",
           "widget-attributes": {
             "default": "https://%s.zendesk.com/api/v2/%s"
