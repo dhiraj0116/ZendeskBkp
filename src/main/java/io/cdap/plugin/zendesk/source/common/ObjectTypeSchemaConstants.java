@@ -380,6 +380,7 @@ public class ObjectTypeSchemaConstants {
     Schema.Field.of("assigneeId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("organizationId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("groupId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
+    Schema.Field.of("generated_timestamp", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("collaboratorIds", Schema.nullableOf(Schema.arrayOf(
       Schema.nullableOf(Schema.of(Schema.Type.LONG))))),
     Schema.Field.of("collaborators", Schema.nullableOf(Schema.arrayOf(Schema.nullableOf(Schema.recordOf(
@@ -500,6 +501,8 @@ public class ObjectTypeSchemaConstants {
     Schema.Field.of("defaultGroupId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("phone", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("sharedPhoneNumber", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN))),
+    Schema.Field.of("details", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
+    Schema.Field.of("iana_time_zone", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("photo", Schema.nullableOf(Schema.recordOf(
       "attachmentObject",
       Schema.Field.of("id", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
