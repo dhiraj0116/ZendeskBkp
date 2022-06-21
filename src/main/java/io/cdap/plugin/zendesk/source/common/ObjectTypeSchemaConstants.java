@@ -55,6 +55,8 @@ public class ObjectTypeSchemaConstants {
     Schema.Field.of("createdAt", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("updatedAt", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("voteSum", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
+    Schema.Field.of("non_author_editor_id", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
+    Schema.Field.of("non_author_updated_at", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("voteCount", Schema.nullableOf(Schema.of(Schema.Type.LONG)))
   );
 
