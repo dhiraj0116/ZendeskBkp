@@ -211,7 +211,7 @@ public class PagedIterator implements Iterator<String>, Closeable {
     Map objectMap = (Map) map;
     replaceKeys(objectMap, objectType.getObjectSchema());
     objectMap.put("object", objectType.getObjectName());
-    objectMap.put("tableName", objectType.getObjectName().replace(" ", "_"));
+    objectMap.put(config.getTableNameField(), objectType.getObjectName().replace(" ", "_"));
     return GSON.toJson(map);
   }
 

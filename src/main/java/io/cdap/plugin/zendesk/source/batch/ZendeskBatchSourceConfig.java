@@ -50,6 +50,8 @@ public class ZendeskBatchSourceConfig extends BaseZendeskSourceConfig {
   public static final String PROPERTY_READ_TIMEOUT = "readTimeout";
   public static final String PROPERTY_URL = "zendeskBaseUrl";
   public static final String PROPERTY_SCHEMA = "schema";
+  public static final String PROPERTY_TABLE_NAME_FIELD = "tableNameField";
+  public static final String TABLE_NAME_FIELD_DEFAULT = "tablename";
 
   @Name(PROPERTY_START_DATE)
   @Description("Filter data to include only records which have Zendesk modified date " +
@@ -106,6 +108,14 @@ public class ZendeskBatchSourceConfig extends BaseZendeskSourceConfig {
   @Nullable
   @Description("Output schema for the source.")
   private String schema;
+
+  @Name(PROPERTY_TABLE_NAME_FIELD)
+  @Macro
+  @Nullable
+  @Description("The name of the field that holds the table name. Must not be the name of any table column that " +
+    "will be read. Defaults to `tablename`. Note, the Table name field value will be ignored if the Mode " +
+    "is set to `Table`.")
+  protected String tableNameField;
 
   /**
    * Constructor for ZendeskBatchSourceConfig object.
@@ -193,6 +203,10 @@ public class ZendeskBatchSourceConfig extends BaseZendeskSourceConfig {
 
   public String getZendeskBaseUrl() {
     return zendeskBaseUrl;
+  }
+
+  public String getTableNameField() {
+    return Strings.isNullOrEmpty(tableNameField) ? TABLE_NAME_FIELD_DEFAULT : tableNameField;
   }
 
   /**

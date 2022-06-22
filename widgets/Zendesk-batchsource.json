@@ -170,6 +170,15 @@
           "widget-attributes": {
             "default": "https://%s.zendesk.com/api/v2/%s"
           }
+        },
+        {
+          "widget-type": "hidden",
+          "label": "Table Name Field",
+          "name": "tableNameField",
+          "widget-attributes": {
+            "placeholder": "The name of the field that holds the table name.",
+            "default": "tablename"
+          }
         }
       ]
     }
