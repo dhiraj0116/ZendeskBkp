@@ -394,7 +394,7 @@ public class ObjectTypeSchemaConstants {
     Schema.Field.of("assigneeId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("organizationId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("groupId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
-    Schema.Field.of("generated_timestamp", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
+    Schema.Field.of("generated_timestamp", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("collaboratorIds", Schema.nullableOf(Schema.arrayOf(
       Schema.nullableOf(Schema.of(Schema.Type.LONG))))),
     Schema.Field.of("collaborators", Schema.nullableOf(Schema.arrayOf(Schema.nullableOf(Schema.recordOf(
