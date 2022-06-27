@@ -55,6 +55,7 @@ public class PagedIterator implements Iterator<String>, Closeable {
 
   private static final Pattern RESTRICTED_PATTERN = Pattern.compile("%2B", Pattern.LITERAL);
   private static final String NEXT_PAGE = "next_page";
+  private static final String NEXT_CURSOR_URL = "after_url";
   private static final String END_TIME = "end_time";
   private static final String COUNT = "count";
   private static final String COMMENT = "Comment";
@@ -160,6 +161,11 @@ public class PagedIterator implements Iterator<String>, Closeable {
 
   @VisibleForTesting
   String getNextPage(Map<String, Object> responseMap) {
+    // Using cursor based pagination for Tickets and Users
+    if (objectType.equals(ObjectType.TICKETS) || objectType.equals(ObjectType.USERS)) {
+      return (String) responseMap.get(NEXT_CURSOR_URL);
+    }
+
     if (!objectType.isBatch()) {
       return (String) responseMap.get(NEXT_PAGE);
     }

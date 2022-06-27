@@ -65,6 +65,7 @@ public class CommentsPagedIterator implements Iterator<String>, Closeable {
       Map userMap = GSON.fromJson(next, Map.class);
       Long userId = ((Number) userMap.get("id")).longValue();
       pagedIterator = new PagedIterator(config, objectType, subdomain, userId);
+      return hasNext();
     }
     return pagedIterator.hasNext();
   }

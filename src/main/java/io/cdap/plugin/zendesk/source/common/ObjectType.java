@@ -72,10 +72,10 @@ public enum ObjectType {
     "Ticket Metric Events", "ticket_metric_events", "incremental/ticket_metric_events.json",
     true, ObjectTypeSchemaConstants.SCHEMA_TICKET_METRIC_EVENTS),
   TICKETS(
-    "Tickets", "tickets", "incremental/tickets.json",
+    "Tickets", "tickets", "incremental/tickets/cursor.json",
     true, ObjectTypeSchemaConstants.SCHEMA_TICKETS),
   USERS(
-    "Users", "users", "incremental/users.json",
+    "Users", "users", "incremental/users/cursor.json",
     true, ObjectTypeSchemaConstants.SCHEMA_USERS);
 
   private static final String CLASS_NAME = ObjectType.class.getName();

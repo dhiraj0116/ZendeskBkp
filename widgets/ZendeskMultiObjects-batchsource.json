@@ -99,7 +99,7 @@
           "label": "Satisfaction Ratings Score",
           "widget-type": "select",
           "widget-attributes": {
-            "default": "Groups",
+            "default": "Offered",
             "values": [
               "",
               "Offered",
