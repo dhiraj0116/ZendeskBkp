@@ -21,6 +21,9 @@ import com.google.gson.GsonBuilder;
 import io.cdap.plugin.zendesk.source.batch.ZendeskBatchSourceConfig;
 import io.cdap.plugin.zendesk.source.common.ObjectType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.Iterator;
@@ -40,6 +43,7 @@ public class CommentsPagedIterator implements Iterator<String>, Closeable {
   private final String subdomain;
   private PagedIterator pagedIterator;
 
+  private static final Logger LOG = LoggerFactory.getLogger(CommentsPagedIterator.class);
   /**
    * Constructor for CommentsPagedIterator.
    * @param entityIterator The instance of PagedIterator object
@@ -61,11 +65,17 @@ public class CommentsPagedIterator implements Iterator<String>, Closeable {
       if (!entityIterator.hasNext()) {
         return false;
       }
-      String next = entityIterator.next();
-      Map userMap = GSON.fromJson(next, Map.class);
-      Long userId = ((Number) userMap.get("id")).longValue();
-      pagedIterator = new PagedIterator(config, objectType, subdomain, userId);
-      return hasNext();
+      // If there are no records in pagedIterator, check for next user
+      while (true) {
+        String next = entityIterator.next();
+        Map userMap = GSON.fromJson(next, Map.class);
+        Long userId = ((Number) userMap.get("id")).longValue();
+        LOG.info("userId is  {}", userId);
+        pagedIterator = new PagedIterator(config, objectType, subdomain, userId);
+        if (pagedIterator.hasNext()) {
+          return true;
+        }
+      }
     }
     return pagedIterator.hasNext();
   }
