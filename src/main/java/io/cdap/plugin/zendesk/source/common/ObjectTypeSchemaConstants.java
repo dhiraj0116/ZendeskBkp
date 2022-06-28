@@ -196,7 +196,9 @@ public class ObjectTypeSchemaConstants {
     Schema.Field.of("name", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("deleted", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN))),
     Schema.Field.of("createdAt", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("updatedAt", Schema.nullableOf(Schema.of(Schema.Type.STRING)))
+    Schema.Field.of("is_public", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN))),
+    Schema.Field.of("description", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
+    Schema.Field.of("default", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN)))
   );
 
   public static final Schema SCHEMA_ORGANIZATIONS = Schema.recordOf(

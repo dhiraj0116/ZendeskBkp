@@ -67,3 +67,19 @@ equal to the specified score.
 **Connect Timeout:** Maximum time in seconds connection initialization can take.
 
 **Read Timeout:** Maximum time in seconds fetching data from the server can take.
+
+Data Type Mappings from Zendesk to CDAP
+----------
+The following table lists out different Zendesk data types, as well as the
+corresponding CDAP types.
+
+| SFMC type              | CDAP type |
+|------------------------|-----------|
+| Boolean                | Boolean   |
+| Byte                   | Long      |
+| DateTime/Time          | string    |
+| Decimal                | string    |
+| int16/int34/int64/long | Long      |
+| String                 | String    |
+| Array                  | Array     |
+| Record                 | Record    |
