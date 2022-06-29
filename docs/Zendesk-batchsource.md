@@ -71,7 +71,7 @@ Data Type Mappings from Zendesk to CDAP
 The following table lists out different Zendesk data types, as well as the
 corresponding CDAP types.
 
-| SFMC type              | CDAP type |
+| Zendesk type           | CDAP type |
 |------------------------|-----------|
 | Boolean                | Boolean   |
 | Byte                   | Long      |
