@@ -351,8 +351,8 @@ public class PagedIteratorTest {
         new HashMap<>(ImmutableMap.of("key", "val1")),
         new HashMap<>(ImmutableMap.of("key", "val2"))));
     List<String> expected = new ArrayList<>();
-    expected.add("{\"key\":\"val1\",\"object\":\"Organizations\"}");
-    expected.add("{\"key\":\"val2\",\"object\":\"Organizations\"}");
+    expected.add("{\"tablename\":\"Organizations\",\"key\":\"val1\",\"object\":\"Organizations\"}");
+    expected.add("{\"tablename\":\"Organizations\",\"key\":\"val2\",\"object\":\"Organizations\"}");
 
     ObjectType objectType = ObjectType.ORGANIZATIONS;
     String subdomain = "subdomain";
@@ -393,9 +393,10 @@ public class PagedIteratorTest {
           new HashMap<>(ImmutableMap.of("key", "val2", "event_type", "Comment")),
           new HashMap<>(ImmutableMap.of("key", "val3", "event_type", "Not Comment"))))));
     List<String> expected = new ArrayList<>();
-    expected.add("{\"key\":\"val1\",\"event_type\":\"Comment\",\"object\":\"Ticket Comments\"}");
-    expected.add("{\"key\":\"val2\",\"event_type\":\"Comment\",\"object\":\"Ticket Comments\"}");
-
+    expected.add("{\"event_type\":\"Comment\",\"tablename\":\"Ticket_Comments\",\"key\":\"val1\",\"object\":" +
+                   "\"Ticket Comments\"}");
+    expected.add("{\"event_type\":\"Comment\",\"tablename\":\"Ticket_Comments\",\"key\":\"val2\",\"object\":" +
+                   "\"Ticket Comments\"}");
     ObjectType objectType = ObjectType.TICKET_COMMENTS;
     String subdomain = "subdomain";
     ZendeskBatchSourceConfig config = new ZendeskBatchSourceConfig(
@@ -802,7 +803,8 @@ public class PagedIteratorTest {
       Assert.assertTrue(actual);
 
       String next = pagedIterator.next();
-      Assert.assertEquals("{\"key\":\"val1\",\"object\":\"Groups\"}", next);
+      Assert.assertEquals("{\"tablename\":\"Groups\",\"key\":\"val1\",\"object\":\"Groups\"}", next);
+
     }
   }
 
@@ -843,7 +845,7 @@ public class PagedIteratorTest {
       Assert.assertTrue(actual);
 
       String next = pagedIterator.next();
-      Assert.assertEquals("{\"key\":\"val1\",\"object\":\"Groups\"}", next);
+      Assert.assertEquals("{\"tablename\":\"Groups\",\"key\":\"val1\",\"object\":\"Groups\"}", next);
 
       response.put("groups", Collections.singletonList(
         new HashMap<>(ImmutableMap.of("key", "val2"))));
@@ -853,7 +855,7 @@ public class PagedIteratorTest {
       Assert.assertTrue(actual);
 
       next = pagedIterator.next();
-      Assert.assertEquals("{\"key\":\"val2\",\"object\":\"Groups\"}", next);
+      Assert.assertEquals("{\"tablename\":\"Groups\",\"key\":\"val2\",\"object\":\"Groups\"}", next);
 
       actual = pagedIterator.hasNext();
       Assert.assertFalse(actual);
@@ -896,8 +898,7 @@ public class PagedIteratorTest {
       Assert.assertTrue(actual);
 
       String next = pagedIterator.next();
-      Assert.assertEquals("{\"key\":\"val1\",\"object\":\"Groups\"}", next);
-
+      Assert.assertEquals("{\"tablename\":\"Groups\",\"key\":\"val1\",\"object\":\"Groups\"}", next);
       actual = pagedIterator.hasNext();
       Assert.assertFalse(actual);
     }
@@ -940,7 +941,7 @@ public class PagedIteratorTest {
       Assert.assertTrue(actual);
 
       String next = pagedIterator.next();
-      Assert.assertEquals("{\"key\":\"val1\",\"object\":\"Groups\"}", next);
+      Assert.assertEquals("{\"tablename\":\"Groups\",\"key\":\"val1\",\"object\":\"Groups\"}", next);
 
       actual = pagedIterator.hasNext();
       Assert.assertFalse(actual);
