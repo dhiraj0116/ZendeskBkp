@@ -26,6 +26,7 @@ import com.google.gson.GsonBuilder;
 import io.cdap.cdap.api.data.schema.Schema;
 import io.cdap.plugin.zendesk.source.batch.ZendeskBatchSourceConfig;
 import io.cdap.plugin.zendesk.source.common.ObjectType;
+
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -39,6 +40,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +63,7 @@ public class PagedIterator implements Iterator<String>, Closeable {
   private static final String COMMENT = "Comment";
   private static final int INCREMENTAL_EXPORT_MAX_COUNT_BY_REQUEST = 1000;
   private static final long FIVE_MINUTES = TimeUnit.MINUTES.toMillis(5);
+  private static final String RETRY_AFTER = "retry-after";
 
   private static final Gson GSON = new GsonBuilder().create();
 
@@ -74,9 +77,10 @@ public class PagedIterator implements Iterator<String>, Closeable {
 
   /**
    * Constructor for PagedIterator object.
-   * @param config The batch source config
+   *
+   * @param config     The batch source config
    * @param objectType The object type
-   * @param subdomain The subdomain name
+   * @param subdomain  The subdomain name
    */
   public PagedIterator(ZendeskBatchSourceConfig config, ObjectType objectType, String subdomain) {
     this(config, objectType, subdomain, null);
@@ -84,10 +88,11 @@ public class PagedIterator implements Iterator<String>, Closeable {
 
   /**
    * Constructor for PagedIterator object.
-   * @param config The batch source config
+   *
+   * @param config     The batch source config
    * @param objectType The object type
-   * @param subdomain The subdomain name
-   * @param entityId The entity id
+   * @param subdomain  The subdomain name
+   * @param entityId   The entity id
    */
   public PagedIterator(ZendeskBatchSourceConfig config, ObjectType objectType,
                        String subdomain, Long entityId) {
@@ -114,7 +119,7 @@ public class PagedIterator implements Iterator<String>, Closeable {
         current = getJsonValuesFromResponse(responseMap);
       } catch (ExecutionException | RetryException e) {
         throw new ConnectionTimeoutException(String.format("Cannot create Zendesk connection for object: '%s'",
-                                                           objectType.getObjectName()), e);
+          objectType.getObjectName()), e);
       }
     }
     return current.hasNext();
@@ -136,7 +141,7 @@ public class PagedIterator implements Iterator<String>, Closeable {
   }
 
   @VisibleForTesting
-  Map<String, Object> getResponseAsMap() throws IOException {
+  Map<String, Object> getResponseAsMap() throws IOException, InterruptedException {
     //replace out %2B with + due to API restriction
     URI uri = URI.create(RESTRICTED_PATTERN.matcher(nextPage).replaceAll("+"));
     try (CloseableHttpResponse response = httpClient.execute(
@@ -148,6 +153,10 @@ public class PagedIterator implements Iterator<String>, Closeable {
         return (Map<String, Object>) GSON.fromJson(responseAsString, Map.class);
       }
       if (statusCode == 429) {
+        String retryAfterTimeInSeconds =
+          Arrays.stream(response.getAllHeaders()).filter(t -> t.getName().equals(RETRY_AFTER)).
+            findFirst().get().getValue();
+        Thread.sleep(Integer.parseInt(retryAfterTimeInSeconds) * 1000);
         throw new RateLimitException();
       }
       if (objectType == ObjectType.ARTICLE_COMMENTS
@@ -206,8 +215,8 @@ public class PagedIterator implements Iterator<String>, Closeable {
     return responseObjects
       .stream()
       .flatMap(responseObject ->
-                 ((List<Object>) ((Map) responseObject).get(objectType.getChildKey()))
-                   .stream())
+        ((List<Object>) ((Map) responseObject).get(objectType.getChildKey()))
+          .stream())
       .filter(map -> COMMENT.equals(((Map) map).get("event_type")))
       .map(this::objectMapToJsonString)
       .iterator();
@@ -216,7 +225,6 @@ public class PagedIterator implements Iterator<String>, Closeable {
   private String objectMapToJsonString(Object map) {
     Map objectMap = (Map) map;
     replaceKeys(objectMap, objectType.getObjectSchema());
-    objectMap.put("object", objectType.getObjectName());
     objectMap.put(config.getTableNameField(), objectType.getObjectName().replace(" ", "_"));
     return GSON.toJson(map);
   }

@@ -32,6 +32,7 @@ import io.cdap.cdap.etl.api.batch.BatchSource;
 import io.cdap.cdap.etl.api.batch.BatchSourceContext;
 import io.cdap.plugin.common.LineageRecorder;
 import io.cdap.plugin.zendesk.source.common.config.BaseZendeskSourceConfig;
+
 import org.apache.hadoop.io.NullWritable;
 
 import java.util.Collections;
@@ -76,14 +77,15 @@ public class ZendeskBatchSource extends BatchSource<NullWritable, StructuredReco
     LineageRecorder lineageRecorder = new LineageRecorder(batchSourceContext, config.referenceName);
     lineageRecorder.createExternalDataset(schema);
     lineageRecorder.recordRead("Read", "Read from Zendesk",
-                               Preconditions.checkNotNull(schema.getFields()).stream()
-                                 .map(Schema.Field::getName)
-                                 .collect(Collectors.toList()));
+      Preconditions.checkNotNull(schema.getFields()).stream()
+        .map(Schema.Field::getName)
+        .collect(Collectors.toList()));
     batchSourceContext.setInput(Input.of(
       config.referenceName,
       new ZendeskInputFormatProvider(config,
-                                     Collections.singletonList(objectToPull),
-                                     ImmutableMap.of(objectToPull, schema.toString()))));
+        Collections.singletonList(objectToPull),
+        ImmutableMap.of(objectToPull, schema.toString()),
+        ZendeskBatchSource.NAME)));
   }
 
   @Override

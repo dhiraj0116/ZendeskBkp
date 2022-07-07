@@ -36,7 +36,7 @@
           "widget-type": "multi-select",
           "widget-attributes": {
             "delimiter": ",",
-            "default": "Groups",
+            "default": "Offered",
             "options": [
               "Article Comments",
               "Post Comments",
