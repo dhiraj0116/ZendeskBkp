@@ -26,8 +26,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_ARTICLE_COMMENTS = Schema.recordOf(
     "articleComments",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("url", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("body", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("authorId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
@@ -44,8 +42,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_POST_COMMENTS = Schema.recordOf(
     "postComments",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("url", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("body", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("authorId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
@@ -61,8 +57,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_REQUESTS_COMMENTS = Schema.recordOf(
     "requestsComments",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("type", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("requestId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("body", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
@@ -104,8 +98,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_TICKET_COMMENTS = Schema.recordOf(
     "ticketComments",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("type", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("body", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("htmlBody", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
@@ -188,8 +180,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_GROUPS = Schema.recordOf(
     "group",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("url", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("name", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("deleted", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN))),
@@ -200,8 +190,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_ORGANIZATIONS = Schema.recordOf(
     "organization",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("url", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("externalId", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("name", Schema.of(Schema.Type.STRING)),
@@ -224,8 +212,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_SATISFACTION_RATINGS = Schema.recordOf(
     "satisfactionRatings",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("url", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("assigneeId", Schema.of(Schema.Type.LONG)),
     Schema.Field.of("groupId", Schema.of(Schema.Type.LONG)),
@@ -243,16 +229,12 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_TAGS = Schema.recordOf(
     "tags",
     Schema.Field.of("name", Schema.of(Schema.Type.STRING)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("count", Schema.nullableOf(Schema.of(Schema.Type.LONG)))
   );
 
   public static final Schema SCHEMA_TICKET_FIELDS = Schema.recordOf(
     "ticketFields",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("url", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("type", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("title", Schema.of(Schema.Type.STRING)),
@@ -300,8 +282,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_TICKET_METRICS = Schema.recordOf(
     "ticketMetrics",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("ticketId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("url", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("groupStations", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
@@ -347,8 +327,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_TICKET_METRIC_EVENTS = Schema.recordOf(
     "ticketMetricEvents",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("ticketId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
     Schema.Field.of("metric", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("instanceId", Schema.nullableOf(Schema.of(Schema.Type.LONG))),
@@ -376,8 +354,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_TICKETS = Schema.recordOf(
     "tickets",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("url", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("externalId", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("type", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
@@ -491,8 +467,6 @@ public class ObjectTypeSchemaConstants {
   public static final Schema SCHEMA_USERS = Schema.recordOf(
     "users",
     Schema.Field.of("id", Schema.of(Schema.Type.LONG)),
-    Schema.Field.of("tablename", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
-    Schema.Field.of("object", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("email", Schema.nullableOf(Schema.of(Schema.Type.STRING))),
     Schema.Field.of("name", Schema.of(Schema.Type.STRING)),
     Schema.Field.of("active", Schema.nullableOf(Schema.of(Schema.Type.BOOLEAN))),

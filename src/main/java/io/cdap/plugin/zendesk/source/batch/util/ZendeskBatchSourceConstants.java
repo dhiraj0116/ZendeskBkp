@@ -24,4 +24,6 @@ public class ZendeskBatchSourceConstants {
   public static final String PROPERTY_CONFIG_JSON = "cdap.zendesk.config";
   public static final String PROPERTY_OBJECTS_JSON = "cdap.zendesk.objects";
   public static final String PROPERTY_SCHEMAS_JSON = "cdap.zendesk.schemas";
+  public static final String PROPERTY_PLUGIN_NAME = "cdap.zendesk.plugin.name";
+
 }

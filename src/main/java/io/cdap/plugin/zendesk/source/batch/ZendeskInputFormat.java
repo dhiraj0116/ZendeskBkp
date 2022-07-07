@@ -22,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import io.cdap.cdap.api.data.schema.Schema;
 import io.cdap.plugin.zendesk.source.batch.util.ZendeskBatchSourceConstants;
 import io.cdap.plugin.zendesk.source.common.ObjectType;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.mapreduce.InputFormat;
 import org.apache.hadoop.mapreduce.InputSplit;
@@ -43,17 +44,19 @@ import java.util.stream.Collectors;
 public class ZendeskInputFormat extends InputFormat {
 
   private static final Gson GSON = new GsonBuilder().create();
-  private static final Type OBJECTS_TYPE = new TypeToken<List<String>>() { }.getType();
-  private static final Type SCHEMAS_TYPE = new TypeToken<Map<String, String>>() { }.getType();
+  private static final Type OBJECTS_TYPE = new TypeToken<List<String>>() {
+  }.getType();
+  private static final Type SCHEMAS_TYPE = new TypeToken<Map<String, String>>() {
+  }.getType();
+  private ZendeskBatchSourceConfig config;
 
   @Override
   public List<InputSplit> getSplits(JobContext context) {
     Configuration configuration = context.getConfiguration();
     List<String> objects = GSON.fromJson(
       configuration.get(ZendeskBatchSourceConstants.PROPERTY_OBJECTS_JSON), OBJECTS_TYPE);
-    ZendeskBatchSourceConfig config =
-      GSON.fromJson(configuration.get(ZendeskBatchSourceConstants.PROPERTY_CONFIG_JSON),
-                    ZendeskBatchSourceConfig.class);
+    config = GSON.fromJson(configuration.get(ZendeskBatchSourceConstants.PROPERTY_CONFIG_JSON),
+      ZendeskBatchSourceConfig.class);
     Set<String> subdomains = config.getSubdomains();
 
     return subdomains.stream()
@@ -68,11 +71,20 @@ public class ZendeskInputFormat extends InputFormat {
     String object = multiSplit.getObject();
 
     Configuration configuration = context.getConfiguration();
+    config = GSON.fromJson(configuration.get(ZendeskBatchSourceConstants.PROPERTY_CONFIG_JSON),
+      ZendeskBatchSourceConfig.class);
     Map<String, String> schemas = GSON.fromJson(
       configuration.get(ZendeskBatchSourceConstants.PROPERTY_SCHEMAS_JSON), SCHEMAS_TYPE);
     Schema schema = Schema.parseJson(schemas.get(object));
     ObjectType objectType = ObjectType.fromString(object);
 
+    // In case of Multi Source plugin, we need to add 'tablename' field to the schema
+    if (configuration.get(ZendeskBatchSourceConstants.PROPERTY_PLUGIN_NAME)
+      .equalsIgnoreCase(ZendeskBatchMultiSource.NAME)) {
+      List<Schema.Field> schemaFields = schema.getFields().stream().collect(Collectors.toList());
+      schemaFields.add(Schema.Field.of(config.getTableNameField(), Schema.of(Schema.Type.STRING)));
+      schema = Schema.recordOf(object, schemaFields);
+    }
     return new ZendeskRecordReader(multiSplit.getSubdomain(), objectType, schema);
   }
 }

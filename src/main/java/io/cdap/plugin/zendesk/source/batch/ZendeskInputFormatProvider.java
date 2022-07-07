@@ -35,17 +35,20 @@ public class ZendeskInputFormatProvider implements InputFormatProvider {
 
   /**
    * Constructor for ZendeskInputFormatProvider.
-   * @param config the batch source config instance
+   *
+   * @param config        the batch source config instance
    * @param objectsToPull the list of objects to pull
-   * @param schemas the map of schemas for each object type
+   * @param schemas       the map of schemas for each object type
+   * @param pluginName    whether plugin is batch source or multi batch source
    */
   public ZendeskInputFormatProvider(ZendeskBatchSourceConfig config,
                                     List<String> objectsToPull,
-                                    Map<String, String> schemas) {
+                                    Map<String, String> schemas, String pluginName) {
     this.conf = new ImmutableMap.Builder<String, String>()
       .put(ZendeskBatchSourceConstants.PROPERTY_CONFIG_JSON, GSON.toJson(config))
       .put(ZendeskBatchSourceConstants.PROPERTY_OBJECTS_JSON, GSON.toJson(objectsToPull))
       .put(ZendeskBatchSourceConstants.PROPERTY_SCHEMAS_JSON, GSON.toJson(schemas))
+      .put(ZendeskBatchSourceConstants.PROPERTY_PLUGIN_NAME, pluginName)
       .build();
   }
 

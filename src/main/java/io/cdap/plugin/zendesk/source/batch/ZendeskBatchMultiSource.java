@@ -29,6 +29,7 @@ import io.cdap.cdap.etl.api.PipelineConfigurer;
 import io.cdap.cdap.etl.api.action.SettableArguments;
 import io.cdap.cdap.etl.api.batch.BatchSource;
 import io.cdap.cdap.etl.api.batch.BatchSourceContext;
+
 import org.apache.hadoop.io.NullWritable;
 
 import java.util.Map;
@@ -80,7 +81,7 @@ public class ZendeskBatchMultiSource extends BatchSource<NullWritable, Structure
         objectSchema));
 
     batchSourceContext.setInput(Input.of(config.referenceName, new ZendeskInputFormatProvider(
-      config, config.getObjects(), schemasStrings)));
+      config, config.getObjects(), schemasStrings, ZendeskBatchMultiSource.NAME)));
   }
 
   @Override
