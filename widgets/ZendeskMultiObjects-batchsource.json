@@ -36,7 +36,7 @@
           "widget-type": "multi-select",
           "widget-attributes": {
             "delimiter": ",",
-            "default": "Offered",
+            "default": "Groups",
             "options": [
               "Article Comments",
               "Post Comments",
@@ -99,7 +99,7 @@
           "label": "Satisfaction Ratings Score",
           "widget-type": "select",
           "widget-attributes": {
-            "default": "Offered",
+            "default": "",
             "values": [
               "",
               "Offered",
